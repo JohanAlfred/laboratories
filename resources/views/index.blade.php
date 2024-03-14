@@ -26,6 +26,12 @@
 									</div>
                                     <h4 class="text-center mb-4 text-white">Sign in your account</h4>
                                     <form action="index.html">
+                                    @if(Session::has('success'))
+                                    <div class="alert-success">{{Session::get('success')}}</div>
+                                    @endif
+                                    @if(Session::has('fail'))
+                                    <div class="alert-danger">{{Session::get('fail')}}</div>
+                                    @endif
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
                                             <input type="email" class="form-control" value="hello@example.com">

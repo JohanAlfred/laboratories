@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PatientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/register', [PatientController::class, 'register']);
 
 //Patient Functions
-
+route::post('/addpatient', [PatientController::class, 'addpatient'])->name('addpatient');
 
 
 //Technician Navigations
