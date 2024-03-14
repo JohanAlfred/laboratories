@@ -25,7 +25,7 @@
 										<a href="index.html" style="font-size:50px; color:white !Important;">ABC</a>
 									</div>
                                     <h4 class="text-center mb-4 text-white">Sign in your account</h4>
-                                    <form action="index.html">
+                                    <form action="" method="post">
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
                                             <input type="email" class="form-control" value="hello@example.com">
@@ -50,7 +50,7 @@
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p class="text-white">Don't have an account? <a class="text-white" href="register">Sign up</a></p>
+                                        <p class="text-white">Don't have an account? <a class="text-white" href="./page-register.html">Sign up</a></p>
                                     </div>
                                 </div>
                             </div>
