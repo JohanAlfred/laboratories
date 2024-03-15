@@ -1,82 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welly - Hospital Bootstrap Admin Dashboard</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link href="./css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="./css/style.css" rel="stylesheet">
+<title>ABC Lab</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./images/newbg.jpeg'); /* You'll need to replace this with the actual path to your background image */
+    background-size: cover;
+    
+    /* overflow:hidden; */
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 0px;
+    background:#d9fdff;
+    justify-content: space-between;
+    align-items: center; 
+  }
+
+  /* .navbar a {
+    text-decoration: none;
+    color: #000;
+    margin: 0 5px;
+  } */
+
+  .header-cust {
+    text-align: center;
+    color: #000;
+  }
+
+  .header h1 {
+    font-size: 3em;
+  }
+
+  .button-group {
+    margin-top: 20px;
+  }
+
+  .button {
+    padding: 10px 40px;
+    margin: 0px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius:3px;
+
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+
+  .appointment-button {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    padding: 10px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius:5px;
+  }
+
+  .appointment-button:hover {
+    background-color: #218838;
+  }
+</style>
 </head>
+<body>
 
-<body class="h-100">
-    <div class="authincation h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-									<div class="text-center mb-3">
-										<a href="index.html" style="font-size:50px; color:white !Important;">ABC</a>
-									</div>
-                                    <h4 class="text-center mb-4 text-white">Sign in your account</h4>
-                                    <form action="index.html">
-                                    @if(Session::has('success'))
-                                    <div class="alert-success">{{Session::get('success')}}</div>
-                                    @endif
-                                    @if(Session::has('fail'))
-                                    <div class="alert-danger">{{Session::get('fail')}}</div>
-                                    @endif
-                                        <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
-                                        </div>
-                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="form-group">
-                                               <div class="custom-control custom-checkbox ml-1 text-white">
-													<input type="checkbox" class="custom-control-input" id="basic_checkbox_1">
-													<label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
-												</div>
-                                            </div>
-                                            <div class="form-group">
-                                                <a class="text-white" href="page-forgot-password.html">Forgot Password?</a>
-                                            </div>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn bg-white text-primary btn-block">Sign Me In</button>
-                                        </div>
-                                    </form>
-                                    <div class="new-account mt-3">
-                                        <p class="text-white">Don't have an account? <a class="text-white" href="register">Sign up</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="navbar">
+  <div>
+    
+  </div>
+  <button class="appointment-button">MAKE AN APPOINTMENT</button>
+</div>
 
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="./vendor/global/global.min.js"></script>
-	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="./js/custom.min.js"></script>
-    <script src="./js/deznav-init.js"></script>
+<div class="header-cust">
+  <h1>Welcome to ABC Lab</h1>
+  <div class="button-group">
+    <button class="button">SignUp</button>
+    <button class="button">SignIn</button>
+  </div>
+</div>
 
 </body>
-
 </html>

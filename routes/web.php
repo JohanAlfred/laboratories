@@ -17,10 +17,11 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/register', [PatientController::class, 'register']);
+Route::get('/login', [PatientController::class, 'login']);
 
 //Patient Functions
 route::post('/addpatient', [PatientController::class, 'addpatient'])->name('addpatient');
-
+route::post('/userloggin', [PatientController::class, 'userloggin'])->name('userloggin');
 
 //Technician Navigations
 
