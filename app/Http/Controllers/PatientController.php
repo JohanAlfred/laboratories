@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patient;
+use Session;
 
 
 
@@ -19,6 +20,28 @@ class PatientController extends Controller
     public function login()
     {
         return view('login');
+    }
+    public function logout(){
+        if(Session::has('loginId')){
+            Session::pull('loginId');
+            return redirect('login');
+        }
+    }
+    public function dashboard()
+    {
+        $data = array();
+        if (Session::has ('loginid')) {
+            $data = User::where('id', '=', Session::get('loginid'))-›first();
+        }
+        return view('dashboard');
+    }
+    public function appoint()
+    {
+        $data = array();
+        if (Session::has ('loginid')) {
+            $data = User::where('id', '=', Session::get('loginid'))-›first();
+        }
+        return view('appointment');
     }
 
 
@@ -45,13 +68,13 @@ class PatientController extends Controller
                 return back()->with('fail', "Email already in use");
             }
             else{
+
                     $patient = new Patient();
                     $patient->name = $request->name;
-                    $patient->username = $request->username;
                     $patient->email =$request->email;
                     $patient->phone = $request->phone;
                     $patient->password = $request->password;
-                    if ($service->save()) 
+                    if ($patient->save()) 
                     {
                         
                         return redirect('/')->with('success', "You Have Been Registered");
@@ -75,17 +98,20 @@ class PatientController extends Controller
     {
         $email = $request->email;
         $pass = $request->password; 
-        $email = $request->email;
-    $pass = $request->password;
 
-    $patient = Patient::where('email', $email)
-                      ->where('password', $pass)
-                      ->first();
+    $user = Patient::where('email', '=', $email)->first();
 
-    if ($patient) {
-        echo"pass";
+    if ($user) {
+        $user2 = Patient::where('password', '=', $pass)->first();
+        if($user2){
+        $request->session()->put('loginId', $user->id);
+        return redirect('dashboard');
+        }
+        else{
+            return redirect()->back()->with('fail', 'Invalid password for email')->withInput();
+        }
     } else {
-        echo"pass";
+        return redirect()->back()->with('fail', 'Invalid email')->withInput();
     }
     }
 }

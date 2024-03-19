@@ -84,6 +84,26 @@
   .appointment-button:hover {
     background-color: #218838;
   }
+  .alert-warning {
+      color: #8a6d3b;
+      background-color: #fcf8e3;
+      border-color: #faebcc;
+  }
+  .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+  }
+  .alert-success {
+      padding: 15px;
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+  }
 </style>
 </head>
 <body>
@@ -96,10 +116,17 @@
 </div>
 
 <div class="header-cust">
+<div class="form-group">
+  @if(Session::has('success'))
+  <div class="alert-success">{{Session::get('success')}}</div>
+  @endif
+  @if(Session::has('fail'))
+  <div class="alert-danger">{{Session::get('fail')}}</div>
+  @endif
   <h1>Welcome to ABC Lab</h1>
   <div class="button-group">
-    <button class="button">SignUp</button>
-    <button class="button">SignIn</button>
+    <button class="button"><a href="register">Sign Up</a></button>
+    <button class="button"><a href="login">Sign In</a></button>
   </div>
 </div>
 

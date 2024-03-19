@@ -5,13 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welly - Hospital Bootstrap Admin Dashboard</title>
+    <title>ABC - Laboratory</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="./css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <style>
+    body{
+        background-image: url('./images/newbg.jpeg') !important;
+        background-size: cover !important;
+    }
     .alert-warning {
                 color: #8a6d3b;
                 background-color: #fcf8e3;
@@ -60,10 +64,6 @@
                                             <input type="text" name="name" class="form-control" placeholder="name">
                                         </div>
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Username</strong></label>
-                                            <input type="text" class="form-control" name="username"  placeholder="username">
-                                        </div>
-                                        <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
                                             <input type="email" class="form-control" name="email" placeholder="hello@example.com">
                                         </div>
@@ -84,7 +84,7 @@
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p class="text-white">Already have an account? <a class="text-white" href="/">Sign in</a></p>
+                                        <p class="text-white">Already have an account? <a class="text-white" href="login">Sign in</a></p>
                                     </div>
                                 </div>
                             </div>

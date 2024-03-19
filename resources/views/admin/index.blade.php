@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welly - Hospital Bootstrap Admin Dashboard</title>
+    <title>ABC - Laboratory</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="./css/style.css" rel="stylesheet">
@@ -25,32 +25,33 @@
 										<a href="index.html" style="font-size:50px; color:white !Important;">ABC</a>
 									</div>
                                     <h4 class="text-center mb-4 text-white">Sign in your account</h4>
-                                    <form action="index.html">
+                                    <form action="{{route('adlogin')}}" method="post">
+                                    @csrf
+                                    @if(Session::has('success'))
+                                    <div class="alert-success">{{Session::get('success')}}</div>
+                                    @endif
+                                    @if(Session::has('fail'))
+                                    <div class="alert-danger">{{Session::get('fail')}}</div>
+                                    @endif
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
+                                            <input type="email" class="form-control" name="email">
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
+                                            <input type="password" class="form-control" name="password">
                                         </div>
-                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="form-group">
-                                               <div class="custom-control custom-checkbox ml-1 text-white">
-													<input type="checkbox" class="custom-control-input" id="basic_checkbox_1">
-													<label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
-												</div>
-                                            </div>
+                                        <!-- <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
                                                 <a class="text-white" href="page-forgot-password.html">Forgot Password?</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="text-center">
                                             <button type="submit" class="btn bg-white text-primary btn-block">Sign Me In</button>
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p class="text-white">Don't have an account? <a class="text-white" href="./page-register.html">Sign up</a></p>
+                                        <p class="text-white">Don't have an account? <a class="text-white" href="register">Sign up</a></p>
                                     </div>
                                 </div>
                             </div>
