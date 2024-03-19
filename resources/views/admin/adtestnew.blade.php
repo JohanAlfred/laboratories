@@ -161,10 +161,10 @@
 						<p class="mb-0">User Manage Admin </p>
 						
 					</div>
-					<a href="viewusers" class="btn btn-outline-primary"><i class="las la-cog scale5 mr-3"></i>Edit Users</a>
+					<a href="adtest" class="btn btn-outline-primary"><i class="las la-cog scale5 mr-3"></i>View Test</a>
 				</div>
 				<div class="row">
-				<form action="{{route('adduser')}}" method="POST">
+				<form action="{{route('savetest')}}" method="POST">
                         @csrf
 						@if(Session::has('success'))
 						<div class="alert-success">{{Session::get('success')}}</div>
@@ -177,19 +177,15 @@
                         <input type="text" class="form-control" id="technician_id" name="name" required style="border:2px solid; width:350px;"><br><br>
                         </div>
 
+                       <?php $technician = DB::table('technician')->get();?>
                         <div class="form-group">
-                        <label for="technician_id">Email</label>
-                        <input type="text" class="form-control" id="technician_id" name="email" required style="border:2px solid; width:350px;"><br><br>
-                        </div>
-
-                        <div class="form-group">
-                        <label for="technician_id">Password</label>
-                        <input type="password" class="form-control" id="technician_id" name="password" required style="border:2px solid; width:350px;"><br><br>
-                        </div>
-
-						<div class="form-group">
-                        <label for="technician_id">Confirm Password</label>
-                        <input type="password" class="form-control" id="technician_id" name="conpassword" required style="border:2px solid; width:350px;"><br><br>
+                            <label for="technician_id">Technician</label>
+                            <select class="form-control" id="technician_id" name="technician_id" required style="border:2px solid; width:350px;">
+                                <option value="">Select Technician</option>
+                                @foreach($technician as $technician)
+                                    <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
 

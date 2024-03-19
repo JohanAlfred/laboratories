@@ -83,7 +83,7 @@
                                     <img src="images/profile/17.jpg" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./page-login.html" class="dropdown-item ai-icon">
+                                    <a href="adlogout" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -105,14 +105,18 @@
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
                     
-                    <li><a href="/appoint" class="ai-icon" aria-expanded="false">
+                    <li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">View Appointment</span>
 						</a>
 					</li>
-					<li><a href="/test" class="ai-icon" aria-expanded="false">
+					<li><a href="/adtest" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Tests</span>
+							<span class="nav-text">Manage Tests</span>
+						</a>
+					</li>\<li><a href="/adresults" class="ai-icon" aria-expanded="false">
+							<i class="flaticon-381-settings-2"></i>
+							<span class="nav-text">View Test Reslts</span>
 						</a>
 					</li>
                     <li><a href="adminadd" class="ai-icon" aria-expanded="false">
@@ -120,12 +124,12 @@
 							<span class="nav-text">User Management</span>
 						</a>
 					</li>
-					<li><a href="/contact" class="ai-icon" aria-expanded="false">
+					<li><a href="/patients" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">Patients</span>
 						</a>
 					</li>
-					<li><a href="/profile" class="ai-icon" aria-expanded="false">
+					<li><a href="/adprofile" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">Profile</span>
 						</a>

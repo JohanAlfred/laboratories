@@ -8,10 +8,10 @@
     <title>ABC Laboratory</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link href="./vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Custom Stylesheet -->
     <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
@@ -105,7 +105,7 @@
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
                     
-				<li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
+                    <li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">View Appointment</span>
 						</a>
@@ -115,7 +115,7 @@
 							<span class="nav-text">Manage Tests</span>
 						</a>
 					</li>
-					<li><a href="/adresults" class="ai-icon" aria-expanded="false">
+                    <li><a href="/adresults" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">View Test Reslts</span>
 						</a>
@@ -158,47 +158,64 @@
 				<div class="form-head d-flex align-items-center mb-sm-4 mb-3">
 					<div class="mr-auto">
 						<h2 class="text-black font-w600">Dashboard</h2>
-						<p class="mb-0">User Manage Admin </p>
+						<p class="mb-0">Laboratory Admin Dashboard </p>
 						
 					</div>
-					<a href="viewusers" class="btn btn-outline-primary"><i class="las la-cog scale5 mr-3"></i>Edit Users</a>
+					<a href="adminadd" class="btn btn-outline-primary">Back</a>
 				</div>
 				<div class="row">
-				<form action="{{route('adduser')}}" method="POST">
-                        @csrf
-						@if(Session::has('success'))
+                @if(Session::has('success'))
 						<div class="alert-success">{{Session::get('success')}}</div>
 						@endif
 						@if(Session::has('fail'))
 						<div class="alert-danger">{{Session::get('fail')}}</div>
 						@endif
-                        <div class="form-group">
-                        <label for="technician_id">Name</label>
-                        <input type="text" class="form-control" id="technician_id" name="name" required style="border:2px solid; width:350px;"><br><br>
+                <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Profile Datatable</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display min-w850">
+                                        <thead>
+                                        <?php $technician = DB::table('technician')->get(); ?>
+                                            
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Passowrd</th>
+                                                <th>Email</th>
+                                                <th>Joining Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($technician as $technician)
+                                            <tr>
+                                                <td>{{ $technician->id }}</td>
+                                                <td>{{ $technician->name }}</td>
+                                                <td>{{ $technician->password }}</td>
+                                                <td><a href="javascript:void(0);"><strong>{{ $technician->email }}</strong></a></td>
+                                                <td>{{ $technician->created_at }}</td>
+                                                <td>
+													<div class="d-flex">
+                                                        <form action="{{route('removetech')}}" method="post">
+                                                            @csrf
+                                                            <input type="text" value="{{ $technician->id }}" name="id" style="display:none;">
+														<button type="submit" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-trash"></i></button></form>
+														
+													</div>												
+												</td>												
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                        <label for="technician_id">Email</label>
-                        <input type="text" class="form-control" id="technician_id" name="email" required style="border:2px solid; width:350px;"><br><br>
-                        </div>
-
-                        <div class="form-group">
-                        <label for="technician_id">Password</label>
-                        <input type="password" class="form-control" id="technician_id" name="password" required style="border:2px solid; width:350px;"><br><br>
-                        </div>
-
-						<div class="form-group">
-                        <label for="technician_id">Confirm Password</label>
-                        <input type="password" class="form-control" id="technician_id" name="conpassword" required style="border:2px solid; width:350px;"><br><br>
-                        </div>
-
-
-                        
-                        <button type="submit" class="btn btn-outline-primary">Create Users</button>
-                    </form>
-					
-				</div>
-				
+                    </div>
+                </div>
             </div>
         </div>
         <!--**********************************
@@ -235,6 +252,14 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
+    <script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+	
+    <!-- Datatable -->
+    <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="./js/plugins-init/datatables.init.js"></script>
     <script src="./vendor/global/global.min.js"></script>
 	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>

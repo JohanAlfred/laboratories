@@ -652,10 +652,21 @@
                     <form action="/create-appointment" method="POST">
                         @csrf
                         <div class="form-group">
-                        <label for="test_id">Test ID:</label>
-                        <input type="text" class="form-control" id="test_id" name="test_id" required style="border:2px solid; width:350px;"><br><br>
+						<?php $test = DB::table('test')->get();?>
+						
+						<div class="form-group">
+                            <label for="technician_id">Technician</label>
+							
+                            <select class="form-control" id="technician_id" name="technician_id" required style="border:2px solid; width:350px;">
+							
+                                <option value="">Select Technician</option>
+								@foreach($test as $test)
+                                    <option value="{{ $test->id }}">{{ $test->name }}</option>
+									@endforeach
+                            </select>
+							
                         </div>
-
+						
                         <div class="form-group" style="display:none;">
                         <!-- <label for="patient_id">Patient ID:</label> -->
                         <input type="text" class="form-control" id="patient_id" name="patient_id" required style="border:2px solid; width:350px; display:none;">

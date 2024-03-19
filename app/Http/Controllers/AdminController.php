@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Technician;
+use App\Models\Test;
 use Session;
 
 use Illuminate\Http\Request;
@@ -12,6 +13,12 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+    public function adlogout(){
+        if(Session::has('adminId')){
+            Session::pull('adminId');
+            return redirect('admin');
+        }
+    }
     public function adminmain()
     {
         return view('admin.dashboard');
@@ -19,6 +26,18 @@ class AdminController extends Controller
     public function adminadd()
     {
         return view('admin.add');
+    }
+    public function viewusers()
+    {
+        return view('admin.viewusers');
+    }
+    public function adtest()
+    {
+        return view('admin.adtest');
+    }
+    public function adtestnew()
+    {
+        return view('admin.adtestnew');
     }
     
 
@@ -43,7 +62,7 @@ class AdminController extends Controller
         else {
             return redirect()->back()->with('fail', 'Invalid email')->withInput();
         }
-   }
+    }
 
    public function adduser(Request $request)
    {
@@ -69,10 +88,10 @@ class AdminController extends Controller
                 if ($technician->save()) 
                 {
                     
-                    return redirect()->route('adduser')->with('fail', 'Invalid password for email');
+                    return back()->with('success', "User Added");
 
                 }
-                echo 'email pass';
+                
         }
         
         
@@ -84,4 +103,53 @@ class AdminController extends Controller
     }
 
    }
+   public function removetech(Request $request)
+    {
+        $id = $request->id;
+        $existingPatient = Technician::where('id', $id)->first();
+        if ($existingPatient) {
+            // Find the technician with the given ID
+            $technician = Technician::findOrFail($id);
+
+            // Delete the technician
+            $technician->delete();
+            return back()->with('success', "Technician Removed Successfully");
+            
+        }
+        else{
+            return back()->with('fail', "User Doesn't Exist");
+        }
+    }
+    public function savetest(Request $request)
+    {
+        $test = new Test();
+        $test->name = $request->name;
+        $test->technicianid = $request->technician_id;
+        if($test->save()){
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Test created successfully');
+        }
+        else{
+            return back()->with('fail', "Test Failed To Save");
+        }
+
+        
+    }
+    public function removetest(Request $request)
+    {
+        $id = $request->id;
+        $existingPatient = Test::where('id', $id)->first();
+        if ($existingPatient) {
+            // Find the technician with the given ID
+            $test = Test::findOrFail($id);
+
+            // Delete the technician
+            $test->delete();
+            return back()->with('success', "Technician Removed Successfully");
+            
+        }
+        else{
+            return back()->with('fail', "Test Doesn't Exist");
+        }
+    }
 }
