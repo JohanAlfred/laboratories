@@ -579,7 +579,7 @@
                                     <img src="images/profile/17.jpg" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./page-login.html" class="dropdown-item ai-icon">
+                                    <a href="logout" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -649,56 +649,58 @@
 					</div>
 					<a href="javascript:void(0)" class="btn btn-outline-primary"><i class="las la-cog scale5 mr-3"></i>Make An Appointment</a>
 				</div>
-                    <form action="/create-appointment" method="POST">
+                    <form action="{{route('createappointment')}}" method="POST">
                         @csrf
                         <div class="form-group">
 						<?php $test = DB::table('test')->get();?>
-						
-						<div class="form-group">
-                            <label for="technician_id">Technician</label>
-							
-                            <select class="form-control" id="technician_id" name="technician_id" required style="border:2px solid; width:350px;">
-							
-                                <option value="">Select Technician</option>
-								@foreach($test as $test)
-                                    <option value="{{ $test->id }}">{{ $test->name }}</option>
-									@endforeach
-                            </select>
-							
-                        </div>
-						
-                        <div class="form-group" style="display:none;">
-                        <!-- <label for="patient_id">Patient ID:</label> -->
-                        <input type="text" class="form-control" id="patient_id" name="patient_id" required style="border:2px solid; width:350px; display:none;">
-                        </div>
+						@if(Session::has('success'))
+						<div class="alert-success">{{Session::get('success')}}</div>
+						@endif
 
-                        <div class="form-group">
-                        <label for="technician_id">Technician ID:</label>
-                        <input type="text" class="form-control" id="technician_id" name="technician_id" required style="border:2px solid; width:350px;"><br><br>
+						@if(Session::has('fail'))
+						<div class="alert-danger">{{Session::get('fail')}}</div>
+						@endif
+						<div class="form-group">
+                            <label for="technician_id">Test</label>
+                            <select class="form-control" id="technician_id" name="test" required style="border:2px solid; width:350px;">
+								@foreach($test as $test)
+								<option value="{{ $test->id }}">{{ $test->name }}</option>
+								@endforeach
+                            </select>
+                        </div>
+						
+                        <label for="patient_id" style="display:none;">Patient ID:</label>
+                        <input type="text" class="form-control" id="patient_id" name="patient_id" value="{{ session('loginId') }}" required style="border:2px solid; width:350px; display:none;">
                         </div>
 
                         <div class="form-group">
                         <label for="technician_id">Name</label>
-                        <input type="text" class="form-control" id="technician_id" name="name" required style="border:2px solid; width:350px;"><br><br>
+                        <input type="text" class="form-control" id="technician_id" name="name" required style="border:2px solid; width:350px;">
                         </div>
 
                         <div class="form-group">
                         <label for="technician_id">Email</label>
-                        <input type="text" class="form-control" id="technician_id" name="email" required style="border:2px solid; width:350px;"><br><br>
+                        <input type="text" class="form-control" id="technician_id" name="email" required style="border:2px solid; width:350px;">
                         </div>
 
 
                         <div class="form-group">
                         <label for="appointment_date">Appointment Date:</label>
-                        <input type="datetime-local" class="form-control" id="appointment_date" name="appointment_date" required style="border:2px solid; width:350px;"><br><br>
+                        <input type="text" class="form-control" id="appointment_date" name="date" required style="border:2px solid; width:350px;">
                         </div>
-                        <!-- <label for="status">Status:</label>
-                        <select id="status" name="status" required>
-                            <option value="scheduled">Scheduled</option>
-                            <option value="completed">Completed</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select><br><br> -->
 
+						<div class="form-group">
+							<label for="appointment_time">Appointment Time:</label>
+							<select class="form-control" id="appointment_time" name="time" required  style="border:2px solid; width:350px;">
+								@for ($i = 10; $i <= 17; $i++)
+									@php
+										$hour = str_pad($i, 2, '0', STR_PAD_LEFT);
+									@endphp
+									<option value="{{ $hour }}:00">{{ $hour }}:00</option>
+									<option value="{{ $hour }}:30">{{ $hour }}:30</option>
+								@endfor
+							</select>
+						</div>
                         <button type="submit" class="btn btn-outline-primary">Create Appointment</button>
                     </form>
 				
@@ -754,11 +756,18 @@
 	<!-- Dashboard 1 -->
 	<script src="./js/dashboard/dashboard-1.js"></script>
 	<script>
+		// $(function () {
+		// 	$('#datetimepicker1').datetimepicker({
+		// 		inline: true,
+		// 	});
+		// });
 		$(function () {
-			$('#datetimepicker1').datetimepicker({
-				inline: true,
-			});
-		});
+        $('#appointment_date').datetimepicker({
+            format: 'DD-MM-YYYY',
+            inline: false,
+            useCurrent: false,
+        });
+    });
 	</script>
 </body>
 </html>

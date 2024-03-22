@@ -19,6 +19,7 @@ class AdminCheck
         if(!Session()->has('adminId'))
         {
             return redirect('login')->with('fail', 'Login in as Admin To access page');
+            view()->share('loginId', session('loginId'));
         }
         return $next($request);
     }

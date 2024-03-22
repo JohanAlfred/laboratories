@@ -26,10 +26,12 @@ Route::get('/appoint', [PatientController::class, 'appoint'])->middleware('isLog
 Route::get('/test', [PatientController::class, 'test'])->middleware('isLoggedIn');
 Route::get('/contact', [PatientController::class, 'contact'])->middleware('isLoggedIn');
 Route::get('/profile', [PatientController::class, 'profile'])->middleware('isLoggedIn');
+Route::post('/payments', [PatientController::class, 'payments']);
 
 //Patient Functions
 route::post('/addpatient', [PatientController::class, 'addpatient'])->name('addpatient');
 route::post('/userloggin', [PatientController::class, 'userloggin'])->name('userloggin');
+route::post('/createappointment', [PatientController::class, 'createappointment'])->name('createappointment');
 
 
 
@@ -42,7 +44,7 @@ route::post('/userloggin', [PatientController::class, 'userloggin'])->name('user
 
 
 //Technician Navigations
-Route::get('/admin', [PatientController::class, 'admin']);
+// Route::get('/admin', [PatientController::class, 'admin']);
 
 
 //Technician Functions

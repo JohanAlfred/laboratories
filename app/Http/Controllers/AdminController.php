@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Technician;
 use App\Models\Test;
+use App\Models\User;
 use Session;
 
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class AdminController extends Controller
                 return redirect('adminmain');
             }
             else{
-                return redirect()->route('admin')->with('fail', 'Invalid password for email')->withInput();
+                return redirect()->back()->with('fail', 'Invalid password for email')->withInput();
             }
         }
         else {
@@ -87,10 +88,7 @@ class AdminController extends Controller
                 $technician->password = $request->password;
                 if ($technician->save()) 
                 {
-                    
-                    return back()->with('success', "User Added");
-
-                }
+                    return back()->with('success', "User Added");}
                 
         }
         
