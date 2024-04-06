@@ -18,13 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => '123',
-            'remember_token' => Str::random(10),
-            'created_at' => now(),
-            'updated_at' => now(),
+        User::create([
+            'name' => 'John Doe',
+            'email' => 'john.doe@example.com',
+            'password' => 'admin',
         ]);
     }
 }

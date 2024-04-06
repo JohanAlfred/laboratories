@@ -104,33 +104,20 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    
-                    <li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
+                    <li>
+                        <a href="/showtechapp" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Appointment</span>
+							<span class="nav-text">Show Appointments</span>
 						</a>
 					</li>
-					<li><a href="/adtest" class="ai-icon" aria-expanded="false">
+					<li>
+                        <a href="/upload" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Manage Tests</span>
+							<span class="nav-text">Upload Result</span>
 						</a>
 					</li>
-                    <li><a href="/adresults" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Test Reslts</span>
-						</a>
-					</li>
-                    <li><a href="adminadd" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">User Management</span>
-						</a>
-					</li>
-					<li><a href="/patients" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Patients</span>
-						</a>
-					</li>
-					<li><a href="/adprofile" class="ai-icon" aria-expanded="false">
+					<li>
+                        <a href="/techprofile" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">Profile</span>
 						</a>
@@ -141,7 +128,7 @@
 				
 				<div class="copyright">
 					<p><strong>ABC - Laboratory</strong> © 2024 All Rights Reserved</p>
-					<p>Made with  by Alfred Johan</p>
+					<p>Made with ♥ by CL-BSCSD-27-18</p>
 				</div>
 			</div>
         </div>
@@ -161,15 +148,15 @@
 						<p class="mb-0">Laboratory Admin Dashboard </p>
 						
 					</div>
-					<a href="adtestnew" class="btn btn-outline-primary">Add Test </a>
+					<a href="adminadd" class="btn btn-outline-primary">Back</a>
 				</div>
 				<div class="row">
                 @if(Session::has('success'))
-                <div class="alert-success">{{Session::get('success')}}</div>
-                @endif
-                @if(Session::has('fail'))
-                <div class="alert-danger">{{Session::get('fail')}}</div>
-                @endif
+						<div class="alert-success">{{Session::get('success')}}</div>
+						@endif
+						@if(Session::has('fail'))
+						<div class="alert-danger">{{Session::get('fail')}}</div>
+						@endif
                 <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -179,32 +166,39 @@
                                 <div class="table-responsive">
                                     <table id="example3" class="display min-w850">
                                         <thead>
-                                        <?php $test = DB::table('test')
-                                                ->join('technician', 'test.technicianid', '=', 'technician.id')
-                                                ->select('test.*', 'technician.name as technician_name')
-                                                ->get(); ?>
+                                        <?php 
+                                         $appId = Session::get('TechId');
+                                         $appointments = DB::table('appointments')
+                                            ->where('technicianid', $appId)
+                                            ->where('status', 'completed')
+                                            ->join('test', 'appointments.testtid', '=', 'test.id')
+                                            ->select('appointments.*', 'test.name as test_name')
+                                            ->get();
+
+                                        ?>
+                                            
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Technician</th>
-                                                <th>Price</th>
-                                                <th>Action</th>
+                                                <th>Test name</th>
+                                                <th>Appointment Date</th>
+                                                <th>Appointment Time</th>
+                                                <th>Status</th>
+                                                <th>Upload Result</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($test as $test)
+                                        @foreach( $appointments as $appointment)
                                             <tr>
-                                                <td>{{ $test->id }}</td>
-                                                <td>{{ $test->name }}</td>
-                                                
-                                                <td>{{ $test->technician_name }}</td>
-                                                <td>{{ $test->price }}</td>
+                                                <td>{{ $appointment->test_name }}</td>
+                                                <td>{{ $appointment->date }}</td>
+                                                <td>{{ $appointment->time }}</td>
+                                                <td>{{ $appointment->status }}</td>
+                
                                                 <td>
-													<div class="d-flex">
-                                                        <form action="{{route('removetest')}}" method="post">
+													<div class="d-flex" style="justify-content: center;">
+                                                        <form action="{{route('removetech')}}" method="post">
                                                             @csrf
-                                                            <input type="text" value="{{ $test->id  }}" name="id" style="display:none;">
-														<button type="submit" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-trash"></i></button></form>
+                                                            <input type="text" value="{{ $appointment->id }}" name="id" style="display:none;">
+														<button type="submit" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-upload"></i></button></form>
 														
 													</div>												
 												</td>												

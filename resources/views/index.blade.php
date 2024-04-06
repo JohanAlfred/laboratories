@@ -112,7 +112,7 @@
   <div>
     
   </div>
-  <button class="appointment-button">MAKE AN APPOINTMENT</button>
+  <a href="tech"><button class="appointment-button">Login as Technician</button></a>
 </div>
 
 <div class="header-cust">

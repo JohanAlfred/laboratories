@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AdminCheck
+class TechCheck
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class AdminCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session()->has('adminId'))
+        if(!Session()->has('TechId'))
         {
-            return redirect('admin')->with('fail', 'Login in as Admin To access page');
+            return redirect('tech')->with('fail', 'Login in as Technician To access page');
             view()->share('loginId', session('loginId'));
         }
         return $next($request);

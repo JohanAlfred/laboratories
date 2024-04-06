@@ -12,7 +12,6 @@ class Technician extends Model
 
     protected $fillable = [
         'name',
-        'username',
         'email',
         'password'
     ];

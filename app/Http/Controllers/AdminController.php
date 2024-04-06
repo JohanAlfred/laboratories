@@ -122,6 +122,7 @@ class AdminController extends Controller
     {
         $test = new Test();
         $test->name = $request->name;
+        $test->price = $request->price;
         $test->technicianid = $request->technician_id;
         if($test->save()){
             // Redirect back with success message

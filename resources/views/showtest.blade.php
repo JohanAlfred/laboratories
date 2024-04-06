@@ -105,32 +105,27 @@
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
                     
-                    <li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
+                    <li><a href="/appoint" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Appointment</span>
+							<span class="nav-text">Make an Appointment</span>
 						</a>
 					</li>
-					<li><a href="/adtest" class="ai-icon" aria-expanded="false">
+                    <li><a href="/appointtest" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Manage Tests</span>
+							<span class="nav-text">Available test</span>
 						</a>
 					</li>
-                    <li><a href="/adresults" class="ai-icon" aria-expanded="false">
+					<li><a href="/showtest" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Test Reslts</span>
+							<span class="nav-text">Show Appointments</span>
 						</a>
 					</li>
-                    <li><a href="adminadd" class="ai-icon" aria-expanded="false">
+					<li><a href="/contact" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">User Management</span>
+							<span class="nav-text">Contact</span>
 						</a>
 					</li>
-					<li><a href="/patients" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Patients</span>
-						</a>
-					</li>
-					<li><a href="/adprofile" class="ai-icon" aria-expanded="false">
+					<li><a href="/profile" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">Profile</span>
 						</a>
@@ -141,7 +136,7 @@
 				
 				<div class="copyright">
 					<p><strong>ABC - Laboratory</strong> © 2024 All Rights Reserved</p>
-					<p>Made with  by Alfred Johan</p>
+					<p>Made with ♥ by CL-BSCSD-27-18</p>
 				</div>
 			</div>
         </div>
@@ -161,15 +156,15 @@
 						<p class="mb-0">Laboratory Admin Dashboard </p>
 						
 					</div>
-					<a href="adtestnew" class="btn btn-outline-primary">Add Test </a>
+					<a href="veiwress" class="btn btn-outline-primary">View Result</a>
 				</div>
 				<div class="row">
                 @if(Session::has('success'))
-                <div class="alert-success">{{Session::get('success')}}</div>
-                @endif
-                @if(Session::has('fail'))
-                <div class="alert-danger">{{Session::get('fail')}}</div>
-                @endif
+						<div class="alert-success">{{Session::get('success')}}</div>
+						@endif
+						@if(Session::has('fail'))
+						<div class="alert-danger">{{Session::get('fail')}}</div>
+						@endif
                 <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -179,31 +174,38 @@
                                 <div class="table-responsive">
                                     <table id="example3" class="display min-w850">
                                         <thead>
-                                        <?php $test = DB::table('test')
-                                                ->join('technician', 'test.technicianid', '=', 'technician.id')
-                                                ->select('test.*', 'technician.name as technician_name')
-                                                ->get(); ?>
+                                        <?php 
+                                         $appId = Session::get('loginId');
+                                         $appointments = DB::table('appointments')
+                                            ->where('patientid', $appId)
+                                            ->where('status', 'paid')
+                                            ->join('test', 'appointments.testtid', '=', 'test.id')
+                                            ->select('appointments.*', 'test.name as test_name')
+                                            ->get();
+
+                                        ?>
+                                            
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Technician</th>
-                                                <th>Price</th>
-                                                <th>Action</th>
+                                                <th>Test name</th>
+                                                <th>Appointment Date</th>
+                                                <th>Appointment Time</th>
+                                                <th>Status</th>
+                                                <th>Cancel appoinment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($test as $test)
+                                        @foreach( $appointments as $appointment)
                                             <tr>
-                                                <td>{{ $test->id }}</td>
-                                                <td>{{ $test->name }}</td>
-                                                
-                                                <td>{{ $test->technician_name }}</td>
-                                                <td>{{ $test->price }}</td>
+                                                <td>{{ $appointment->test_name }}</td>
+                                                <td>{{ $appointment->date }}</td>
+                                                <td>{{ $appointment->time }}</td>
+                                                <td>{{ $appointment->status }}</td>
+                
                                                 <td>
-													<div class="d-flex">
-                                                        <form action="{{route('removetest')}}" method="post">
+													<div class="d-flex" style="justify-content: center;">
+                                                        <form action="{{route('removetech')}}" method="post">
                                                             @csrf
-                                                            <input type="text" value="{{ $test->id  }}" name="id" style="display:none;">
+                                                            <input type="text" value="{{ $appointment->id }}" name="id" style="display:none;">
 														<button type="submit" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-trash"></i></button></form>
 														
 													</div>												

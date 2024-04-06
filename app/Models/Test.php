@@ -10,7 +10,8 @@ class Test extends Model
     use HasFactory;
     protected $table = 'test';
     protected $fillable = [
-        'name', 
+        'name',
+        'price', 
         'technicianid'
     ];
 }

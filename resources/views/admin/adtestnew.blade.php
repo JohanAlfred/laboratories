@@ -187,10 +187,13 @@
                                 @endforeach
                             </select>
                         </div>
-
+                        <div class="form-group">
+                        <label for="technician_id">Price</label>
+                        <input type="text" class="form-control" id="technician_id" name="price" required style="border:2px solid; width:350px;"><br><br>
+                        </div>
 
                         
-                        <button type="submit" class="btn btn-outline-primary">Create Users</button>
+                        <button type="submit" class="btn btn-outline-primary">Create Test</button>
                     </form>
 					
 				</div>

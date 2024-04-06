@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ABC Laboratory</title>
+    <title>Welly - Hospital Bootstrap Admin Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <!-- Datatable -->
-    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- Custom Stylesheet -->
+    <link href="./vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
     <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
@@ -40,8 +40,8 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="" class="brand-logo" style="color:black;">
-                ABC Laboratory
+            <a href="dashboard" class="brand-logo">
+                <h1>ABC Laboratory</h1>
             </a>
 
             <div class="nav-control">
@@ -52,14 +52,6 @@
         </div>
         <!--**********************************
             Nav header end
-        ***********************************-->
-		
-		<!--**********************************
-            Chat box start
-        ***********************************-->
-		
-		<!--**********************************
-            Chat box End
         ***********************************-->
 		
 		<!--**********************************
@@ -83,10 +75,10 @@
                                     <img src="images/profile/17.jpg" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="adlogout" class="dropdown-item ai-icon">
-                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
+                                <a href="logout" class="dropdown-item ai-icon">
+                                    <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                    <span class="ml-2">Logout </span>
+                                </a>
                                 </div>
                             </li>
                         </ul>
@@ -105,32 +97,27 @@
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
                     
-                    <li><a href="/viewappointment" class="ai-icon" aria-expanded="false">
+                    <li><a href="/appoint" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Appointment</span>
+							<span class="nav-text">Make an Appointment</span>
 						</a>
 					</li>
-					<li><a href="/adtest" class="ai-icon" aria-expanded="false">
+                    <li><a href="/appointtest" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Manage Tests</span>
+							<span class="nav-text">Available test</span>
 						</a>
 					</li>
-                    <li><a href="/adresults" class="ai-icon" aria-expanded="false">
+					<li><a href="/showtest" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">View Test Reslts</span>
+							<span class="nav-text">Show Appointments</span>
 						</a>
 					</li>
-                    <li><a href="adminadd" class="ai-icon" aria-expanded="false">
+					<li><a href="/contact" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">User Management</span>
+							<span class="nav-text">Contact</span>
 						</a>
 					</li>
-					<li><a href="/patients" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Patients</span>
-						</a>
-					</li>
-					<li><a href="/adprofile" class="ai-icon" aria-expanded="false">
+					<li><a href="/profile" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-settings-2"></i>
 							<span class="nav-text">Profile</span>
 						</a>
@@ -141,7 +128,7 @@
 				
 				<div class="copyright">
 					<p><strong>ABC - Laboratory</strong> © 2024 All Rights Reserved</p>
-					<p>Made with  by Alfred Johan</p>
+					<p>Made with ♥ by CL-BSCSD-27-18</p>
 				</div>
 			</div>
         </div>
@@ -158,65 +145,29 @@
 				<div class="form-head d-flex align-items-center mb-sm-4 mb-3">
 					<div class="mr-auto">
 						<h2 class="text-black font-w600">Dashboard</h2>
-						<p class="mb-0">Laboratory Admin Dashboard </p>
-						
+						<p class="mb-0">Hospital Patient Dashboard </p>
 					</div>
-					<a href="adtestnew" class="btn btn-outline-primary">Add Test </a>
 				</div>
-				<div class="row">
-                @if(Session::has('success'))
-                <div class="alert-success">{{Session::get('success')}}</div>
-                @endif
-                @if(Session::has('fail'))
-                <div class="alert-danger">{{Session::get('fail')}}</div>
-                @endif
-                <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Profile Datatable</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display min-w850">
-                                        <thead>
-                                        <?php $test = DB::table('test')
-                                                ->join('technician', 'test.technicianid', '=', 'technician.id')
-                                                ->select('test.*', 'technician.name as technician_name')
-                                                ->get(); ?>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Technician</th>
-                                                <th>Price</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($test as $test)
-                                            <tr>
-                                                <td>{{ $test->id }}</td>
-                                                <td>{{ $test->name }}</td>
-                                                
-                                                <td>{{ $test->technician_name }}</td>
-                                                <td>{{ $test->price }}</td>
-                                                <td>
-													<div class="d-flex">
-                                                        <form action="{{route('removetest')}}" method="post">
-                                                            @csrf
-                                                            <input type="text" value="{{ $test->id  }}" name="id" style="display:none;">
-														<button type="submit" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-trash"></i></button></form>
-														
-													</div>												
-												</td>												
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        @if(Session::has('success'))
+                        <div class="alert-success">{{Session::get('success')}}</div>
+                        @endif
+
+                        @if(Session::has('fail'))
+                        <div class="alert-danger">{{Session::get('fail')}}</div>
+                        @endif
+                <form action="{{route('sendform')}}" method="post">
+                    @csrf
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required class="form-control" style="border:2px solid; width:350px;"><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required class="form-control" style="border:2px solid; width:350px;"><br>
+                    <label for="subject">Subject:</label><br>
+                    <input type="text" id="subject" name="subject" required class="form-control" style="border:2px solid; width:350px;"><br>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" required  style="border:2px solid; width:350px; height:150px;"></textarea><br>
+                    <button type="submit" class="btn btn-outline-primary">Send Message</button>
+                </form>
+				
             </div>
         </div>
         <!--**********************************
@@ -228,7 +179,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed Johan; Developed by Johan 2020</p>
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2020</p>
             </div>
         </div>
         <!--**********************************
@@ -255,14 +206,6 @@
     <!-- Required vendors -->
     <script src="./vendor/global/global.min.js"></script>
 	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="./js/custom.min.js"></script>
-	<script src="./js/deznav-init.js"></script>
-	
-    <!-- Datatable -->
-    <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="./js/plugins-init/datatables.init.js"></script>
-    <script src="./vendor/global/global.min.js"></script>
-	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="./js/custom.min.js"></script>
 	<script src="./js/deznav-init.js"></script>
@@ -277,11 +220,18 @@
 	<!-- Dashboard 1 -->
 	<script src="./js/dashboard/dashboard-1.js"></script>
 	<script>
+		// $(function () {
+		// 	$('#datetimepicker1').datetimepicker({
+		// 		inline: true,
+		// 	});
+		// });
 		$(function () {
-			$('#datetimepicker1').datetimepicker({
-				inline: true,
-			});
-		});
+        $('#appointment_date').datetimepicker({
+            format: 'DD-MM-YYYY',
+            inline: false,
+            useCurrent: false,
+        });
+    });
 	</script>
 </body>
 </html>
